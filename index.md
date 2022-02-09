@@ -55,7 +55,7 @@ ___
 
 ## Updated Model
 For this project to work properly, we need to `parse` additional data from the `pokeAPI`. Specifically, we need to access two properties:
- * `name` property for the `ability`
+ * `name` property for the `move`
  * The `next` property which is a `String` that we can convert to a `URL`
  
 Update your Model accordingly.
