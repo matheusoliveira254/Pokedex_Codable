@@ -46,9 +46,9 @@ A few items we’d like to highlight:
 1. Notice there is a `UINavigationController`
 2. Notice that there is a segue
 3. After removing the `searchBar` 
-		1. Give the `stackView`  which holds the `pokemonIDLabel` and `pokemonNameLabel`  a constraint for its `top`
-		2. Align `Top` to `Safe Area Top` with a constant of `30` points
-		3. Everything else should lock back into place
+	1. Give the `stackView`  which holds the `pokemonIDLabel` and `pokemonNameLabel`  a constraint for its `top`
+	2. Align `Top` to `Safe Area Top` with a constant of `30` points
+	3. Everything else should lock back into place
 
 Make a commit when you’ve completed this step
 ___
