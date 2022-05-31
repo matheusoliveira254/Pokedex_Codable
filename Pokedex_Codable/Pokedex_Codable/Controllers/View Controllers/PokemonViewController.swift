@@ -25,16 +25,20 @@ class PokemonViewController: UIViewController {
     var pokemon: Pokemon?
     
     func updateViews(for pokemon: Pokemon) {
-//        NetworkingController.fetchImage(for: pokemon) { image in
-//            guard let image = image else {return}
-//            DispatchQueue.main.async {
-//                self.pokemon = pokemon
-//                self.pokemonSpriteImageView.image = image
-//                self.pokemonIDLabel.text = ("No:\(pokemon.id)")
-//                self.pokemonNameLabel.text = pokemon.name.capitalized
-//                self.pokemonMovesTableView.reloadData()
-//            }
-//        }
+        NetworkingController.fetchImage(for: pokemon.sprites.frontShiny) { [weak self] result in
+            switch result {
+            case.success(let image):
+                DispatchQueue.main.async {
+                    self?.pokemon = pokemon
+                    self?.pokemonSpriteImageView.image = image
+                    self?.pokemonIDLabel.text = ("No:\(pokemon.id)")
+                    self?.pokemonNameLabel.text = pokemon.name.capitalized
+                    self?.pokemonMovesTableView.reloadData()
+                }
+            case .failure(let error):
+                print("There was an error!", error.errorDescription!)
+            }
+        }
     }
     
 }// End

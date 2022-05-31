@@ -11,14 +11,7 @@ import UIKit.UIImage
 struct NetworkingController {
     
     private static let baseURLString = "https://pokeapi.co"
-    
-//    static var initalURL: URL? {
-//        guard let baseURL = URL(string: baseURLString) else {return nil}
-//        let initalURL = baseURL.appendingPathComponent("/api/v2/pokemon")
-//        print(initalURL)
-//        return initalURL
-//    }
-    
+        
     static func fetchPokedex(with url: URL, completion: @escaping(Result<Pokedex, ResultError>) -> Void) {
         
         URLSession.shared.dataTask(with: url) { dTaskData, _, error in

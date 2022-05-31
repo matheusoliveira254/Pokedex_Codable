@@ -14,12 +14,12 @@ class PokedexTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkingController.fetchPokedex(with: URL(string: "https://pokeapi.co/api/v2/pokemon")!) { result in
+        NetworkingController.fetchPokedex(with: URL(string: "https://pokeapi.co/api/v2/pokemon")!) { [weak self] result in
             switch result {
             case .success(let pokedex):
-                self.pokedexResults = pokedex.results
+                self?.pokedexResults = pokedex.results
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 }
             case .failure(let error):
                 print("There was an error!", error.errorDescription!)
@@ -39,29 +39,6 @@ class PokedexTableViewController: UITableViewController {
         cell.updateViews(pokemonURlString: pokemonURLString)
         return cell
     }
-    
-    //MARK: - Pagination
-    
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//
-//        let lastPokedexIndex = pokedexResults.count - 1
-//        guard let pokedex = pokedex, let nextURL = URL(string: pokedex.next) else {return}
-//
-//        if indexPath.row == lastPokedexIndex {
-//            NetworkingController.fetchPokedex(with: nextURL) { result in
-//                switch result {
-//                case .success(let pokedex):
-//                    self.pokedex = pokedex
-//                    self.pokedexResults.append(contentsOf: pokedex.results)
-//                    DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                    }
-//                case .failure(let error):
-//                    print("There was an error!", error.errorDescription!)
-//                }
-//            }
-//        }
-//    }
     
     /*
      // MARK: - Navigation
