@@ -15,6 +15,7 @@ struct PokemonResults: Decodable {
     let name: String
     let url: String
 }
+
 struct Pokemon: Decodable {
     let sprites: Sprites
     let name: String
@@ -35,4 +36,3 @@ struct Sprites: Decodable {
     let frontShiny: String
     let frontShinyFemale: String?
 }
-

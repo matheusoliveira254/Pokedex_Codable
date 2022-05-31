@@ -14,7 +14,7 @@ class PokedexTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkingController.fetchPokedex(with: NetworkingController.initalURL!) { result in
+        NetworkingController.fetchPokedex(with: URL(string: "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20")!) { result in
             switch result {
             case .success(let pokedex):
                 self.pokedexResults = pokedex.results
