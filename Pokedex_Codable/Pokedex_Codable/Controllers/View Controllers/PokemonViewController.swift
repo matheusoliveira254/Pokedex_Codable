@@ -16,7 +16,6 @@ class PokemonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pokemonMovesTableView.delegate = self
         pokemonMovesTableView.dataSource = self
     }
     
@@ -28,14 +27,14 @@ class PokemonViewController: UIViewController {
     
     func updateViews() {
         guard let pokemon = pokemon else {return}
-        NetworkingController.fetchImage(for: pokemon.sprites.frontShiny) { result in
+        NetworkingController.fetchImage(for: pokemon.sprites.frontShiny) { [weak self] result in
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {
-                    self.pokemonSpriteImageView.image = image
-                    self.pokemonNameLabel.text = pokemon.name.capitalized
-                    self.pokemonIDLabel.text = "No: \(pokemon.id)"
-                    self.pokemonMovesTableView.reloadData()
+                    self?.pokemonSpriteImageView.image = image
+                    self?.pokemonNameLabel.text = pokemon.name.capitalized
+                    self?.pokemonIDLabel.text = "No: \(pokemon.id)"
+                    self?.pokemonMovesTableView.reloadData()
                 }
             case .failure(let error):
                 print("There was an error!", error.errorDescription!)
@@ -45,7 +44,7 @@ class PokemonViewController: UIViewController {
 }// End
 
 
-extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
+extension PokemonViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Moves"
@@ -64,5 +63,3 @@ extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
-

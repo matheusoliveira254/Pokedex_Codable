@@ -15,13 +15,13 @@ class PokedexTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkingController.fetchPokedex(with: NetworkingController.initalURL!) { result in
+        NetworkingController.fetchPokedex(with: URL(string: "https://pokeapi.co/api/v2/pokemon")!) { [weak self] result in
             switch result {
             case .success(let pokedex):
-                self.pokedex = pokedex
-                self.pokedexResults = pokedex.results
+                self?.pokedex = pokedex
+                self?.pokedexResults = pokedex.results
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 }
             case .failure(let error):
                 print("There was an error!", error.errorDescription!)
@@ -50,13 +50,13 @@ class PokedexTableViewController: UITableViewController {
         guard let pokedex = pokedex, let nextURL = URL(string: pokedex.next) else {return}
         
         if indexPath.row == lastPokedexIndex {
-            NetworkingController.fetchPokedex(with: nextURL) { result in
+            NetworkingController.fetchPokedex(with: nextURL) { [weak self] result in
                 switch result {
                 case .success(let pokedex):
-                    self.pokedex = pokedex
-                    self.pokedexResults.append(contentsOf: pokedex.results)
+                    self?.pokedex = pokedex
+                    self?.pokedexResults.append(contentsOf: pokedex.results)
                     DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                        self?.tableView.reloadData()
                     }
                 case .failure(let error):
                     print("There was an error!", error.errorDescription!)
