@@ -37,6 +37,7 @@ struct NetworkingController {
     
     static func fetchPokemon(with urlString: String, completion: @escaping (Result<Pokemon, ResultError>) -> Void) {
         guard let pokemonURL = URL(string: urlString) else {return}
+        
         URLSession.shared.dataTask(with: pokemonURL) { dTaskData, _, error in
             if let error = error {
                 print("Encountered error: \(error.localizedDescription)")
