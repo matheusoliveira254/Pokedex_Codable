@@ -22,12 +22,12 @@ struct Pokemon: Decodable {
     let name: String
     let id: Int
     let weight: Int
-    let moves: [Move]
+    let moves: [Moves]
 }
 
-//struct Moves: Decodable {
-//    let move: [Move]
-//}
+struct Moves: Decodable {
+    let move: Move
+}
 
 struct Move: Decodable {
     let name: String

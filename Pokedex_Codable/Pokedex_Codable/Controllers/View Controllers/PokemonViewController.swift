@@ -54,15 +54,15 @@ extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return pokemon?.moves.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "moveCell", for: indexPath)
         guard let pokemon = pokemon else {return UITableViewCell() }
-        let move = pokemon.moves[indexPath.row]
-        cell.textLabel?.text = move.name
+        let move = pokemon.moves[indexPath.row].move.name
+        cell.textLabel?.text = move
         return cell
     }
 }
